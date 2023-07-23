@@ -1,11 +1,16 @@
 import React, {useState} from 'react';
-import Loading from "../components/Loading";
-import bg from '../img/bg.jpg';
-const [loading, setLoading] = useState(false);
+import './Login.css';
+import Loader from '../Loader/Loader';
 
+import Modal from '../components/Modal';
 
 
 const Landingpage = () => {
+
+  const [isLoading, setLoading] = useState(false);
+
+  const [show, setShow] =useState(false);
+const [photo, setPhoto] = useState();
  const [value,setValue] = useState("")
 const[results, setResults] = useState([])
  const fetchimages = () =>{
@@ -13,40 +18,61 @@ const[results, setResults] = useState([])
 .then(res=> res.json())
 .then(data=>{
   setResults(data.results)
+  console.log(data.results);
+
 })
 
 
 }
-if(loading) return <Loading />;
+
   return (
     <>
-      <div className="App pt-20 text-center ">
+      <div className="App  text-center  ">
    
-        <div className="mydiv flex justify-center my-10 mx-10% ">
+        <div className="mydiv flex justify-center itms-center p-28 ">
               
-          <span className='text-3xl font-bold px-4 bg-slate-400  text-black'>search</span>
-          <input className='w-72 p-2 rounded-sm border-none bg-none' type="text" value={value} onChange={(e)=>setValue(e.target.value)}/>
-       <button className='text-3xl font-bold bg-slate-400 p-2 text-black' onClick={()=>fetchimages()}>GO!</button>
+
+          <input className='w-[26rem] p-2 rounded-sm  bg-white/30 shadow-md text-white' type="text" placeholder="Start new search" value={value} onChange={(e)=>setValue(e.target.value)}/>
+          {isLoading ? "" :
+      ( <button className='text-3xl font-bold bg-white/30 border rounded-sm shadow-md p-2 text-white' onClick={()=>fetchimages()}>GO!</button> )}
+      {isLoading ? <Loader /> : ''}
        
         </div>
+        <div className="h-16 bg-slate-700 flex justify-between px-8 items-center text-black">
+          <div className='bg-slate-400 rounded-sm px-2 py-1 border '>Technology</div>
+          <div className='bg-slate-400 rounded-sm px-2 py-1'>Technology</div>
+          <div className='bg-slate-400 rounded-sm px-2 py-1'>Technology</div>
+          <div className='bg-slate-400 rounded-sm px-2 py-1'>Technology</div>
+          <div className='bg-slate-400 rounded-sm px-2 py-1'>Technology</div>
+          <div className='bg-slate-400 rounded-sm px-2 py-1'>Technology</div>
+          <div className='bg-slate-400 rounded-sm px-2 py-1'>Technology</div>
+         
+        </div>
 
-        <div className="gallery flex flex-wrap justify-around p-2 gap-4 ">
+        <div className="gallery flex flex-wrap justify-around p-2 mt-8 gap-6 gap-y-10">
           
-          {
+          { 
             results.map((item)=>{
-           
-              return( <>
-              <div className='flex flex-col '>
-              <img className='w-64 h-64' value={item.id} src={item.urls.small} />
-              <button className='bg-slate-700 p-2'>Add to favourite</button></div></>
+            
+              return( 
+                <div className='flex flex-col ' value={item.id}>
+                  <img className='w-64 h-64' src={item.urls.small} onClick={() => { setShow(true); setPhoto(item); } } />
+
+
+
+                  <button className='bg-slate-700 p-2'>Add to favourite</button></div>
+                 
               )
             })
-          }  
-          
+
+            
+          }   <Modal show={show} item={photo} onClose={()=>setShow(false)} />
+           
         </div>
       </div>
+     
     </>
   )
 }
 
-export default Landingpage
+export default Landingpage;

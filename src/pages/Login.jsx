@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
-
+import './Login.css';
 const Login = () => {
   const navigate = useNavigate();
   const { currentUser, signinWithGoogle } = UserAuth();
@@ -25,10 +25,10 @@ const Login = () => {
       <div className="hero-content text-center">
         <div className="max-w">
         
-          <h1 className="py-5 text-7xl font-bold">
+          <h1 className="py-5 text-5xl font-bold text-white md:text-7xl">
          Discover over 2000,000 <br></br> free stock images
           </h1>
-          <button  onClick={handleLogin} className="btn bg-slate-600">Login With Google</button>
+          <button  onClick={handleLogin} className="btn backdrop-blur-xl bg-black">Login With Google</button>
         </div>
       </div>
     </div>

@@ -13,11 +13,11 @@ const Navbar = () => {
   }
 
   return (
-    <div className="navbar fixed z-10 bg-neutral text-neutral-content">
+    <div className="navbar fixed z-10 backdrop-blur-xl bg-white/30 shadow-md">
       <div className="containerWrap flex justify-between">
-        <a className="btn btn-ghost normal-case text-xl">Assignment</a>
-        <Link to="/Favourites" className="btn btn-ghost normal-case text-xl">My Favourite Images</Link>
-        {currentUser ? <button onClick={handleLogout}>Logout</button> : ""}
+        <a className="btn btn-ghost normal-case text-white text-xl">Homepage</a>
+        <Link to="/Favourites" className="btn btn-ghost normal-case text-white text-xl">My Favourite Images</Link>
+        {currentUser ? <button className="text-white text-bold" onClick={handleLogout}>Logout</button> : ""}
       </div>
     </div>
   )

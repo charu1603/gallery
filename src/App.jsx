@@ -4,9 +4,8 @@ import { AuthProvider } from "./context/AuthContext";
 import Landingpage from "./pages/Landingpage";
 import Login from "./pages/Login";
 import { PrivateRoute } from "./Routes/PrivateRoute";
-import Details from "./components/Details";
 import Favourites from './components/Favourites';
-
+import Modal from './components/Modal';
 function App() {
   return (
     <AuthProvider>
@@ -21,8 +20,8 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route path="/items/:id" element={<Details />} />
-        <Route path="/Favourites" element={<Favourites />} />
+    <Route path="/search/photos/:id" element={<Modal />} />
+        <Route path="/" element={<PrivateRoute><Favourites /></PrivateRoute>} />
       </Routes>
     </AuthProvider>
   );
